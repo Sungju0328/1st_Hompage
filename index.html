@@ -628,78 +628,185 @@ html, body {
 
 
   <!-- ═══════════════════════════════════════════════
-       SCREEN 1 — DETECT
+       SCREEN 0 — WELCOME
   ═══════════════════════════════════════════════ -->
-  <div class="screen active" id="s1">
-    <div class="scan-line" style="overflow:hidden;position:absolute;inset:0;pointer-events:none;z-index:5;">
-      <div style="position:absolute;left:0;right:0;height:2px;
-        background:linear-gradient(to right,transparent 0%,rgba(50,215,75,0)10%,rgba(50,215,75,0.45)50%,rgba(50,215,75,0)90%,transparent 100%);
-        animation:scanGrow 3.2s cubic-bezier(0.4,0,0.6,1) infinite;"></div>
-    </div>
-
-    <div class="glass-deep fade-up" style="
-      position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);
-      width:268px;padding:24px 22px 22px;text-align:center;overflow:hidden;border-radius:var(--r-xl);">
-
-      <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);
-        width:180px;height:90px;pointer-events:none;
-        background:radial-gradient(ellipse,rgba(255,60,90,0.18) 0%,transparent 70%);"></div>
-
-      <!-- App icon -->
-      <div style="width:48px;height:48px;border-radius:13px;
-        background:linear-gradient(145deg,#FF6B6B,#FF3C5A,#C83060);
-        display:flex;align-items:center;justify-content:center;
-        margin:0 auto 14px;
-        box-shadow:0 6px 18px rgba(255,60,90,0.45),inset 0 1px 0 rgba(255,255,255,0.20);">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M12 4C9.2 4 7 6.5 7 9.5c0 3.2 2.8 6 5 9.5 2.2-3.5 5-6.3 5-9.5C17 6.5 14.8 4 12 4z" fill="white" opacity="0.92"/>
-          <circle cx="12" cy="9.5" r="2.2" fill="rgba(255,255,255,0.5)"/>
-        </svg>
-      </div>
-
-      <div style="font-size:16px;font-weight:600;color:var(--t1);letter-spacing:-0.018em;margin-bottom:4px;">
-        Scan Your Food
-      </div>
-      <div style="font-size:12px;color:var(--t3);margin-bottom:16px;line-height:1.5;">
-        Take a photo to analyze glucose impact
-      </div>
-
-      <div class="divider" style="margin-bottom:14px;"></div>
-
-      <label for="cameraInput" style="
-        display:block;width:100%;padding:10px 16px;border-radius:100px;
-        background:linear-gradient(135deg,rgba(255,60,90,0.28),rgba(200,48,96,0.22));
-        border:1px solid rgba(255,80,100,0.40);
-        color:rgba(255,255,255,0.92);
-        font-size:13px;font-weight:600;
-        font-family:-apple-system,sans-serif;
-        cursor:pointer;letter-spacing:-0.01em;text-align:center;
-        transition:background 0.16s,border-color 0.16s;">
-        📷 &nbsp;Scan Food
-      </label>
-      <input id="cameraInput" type="file" accept="image/*" capture="environment"
-             style="display:none;">
-
-      <div style="margin-top:10px;">
-        <button onclick="goTo('s2')" style="
-          width:100%;padding:8px 16px;border-radius:100px;
-          background:rgba(255,255,255,0.06);
-          border:1px solid rgba(255,255,255,0.12);
-          color:rgba(255,255,255,0.45);
-          font-size:11px;font-weight:400;
-          font-family:-apple-system,sans-serif;
-          cursor:pointer;letter-spacing:-0.01em;">
-          Browse Demo Foods
+  <div class="screen active" id="s0">
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:20;">
+      <div class="glass-deep fade-up" style="width:300px;padding:40px 28px 32px;text-align:center;border-radius:var(--r-xl);overflow:hidden;">
+        <div style="width:60px;height:60px;border-radius:17px;
+          background:linear-gradient(145deg,#FF6B6B,#FF3C5A,#C83060);
+          display:flex;align-items:center;justify-content:center;
+          margin:0 auto 20px;
+          box-shadow:0 8px 24px rgba(255,60,90,0.48),inset 0 1px 0 rgba(255,255,255,0.22);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M12 4C9.2 4 7 6.5 7 9.5c0 3.2 2.8 6 5 9.5 2.2-3.5 5-6.3 5-9.5C17 6.5 14.8 4 12 4z" fill="white" opacity="0.92"/>
+            <circle cx="12" cy="9.5" r="2.2" fill="rgba(255,255,255,0.5)"/>
+          </svg>
+        </div>
+        <div style="font-size:22px;font-weight:700;color:var(--t1);letter-spacing:-0.028em;margin-bottom:10px;">
+          Ready to Scan?
+        </div>
+        <div style="font-size:13px;color:var(--t3);line-height:1.65;margin-bottom:26px;">
+          Point at any food, snack, or drink.<br>
+          AI reads the label &amp; identifies it instantly.
+        </div>
+        <div class="divider" style="margin-bottom:20px;"></div>
+        <button onclick="startScan()" style="
+          display:block;width:100%;padding:13px 20px;border-radius:100px;
+          background:linear-gradient(135deg,rgba(255,60,90,0.34),rgba(200,48,96,0.26));
+          border:1px solid rgba(255,80,100,0.45);color:rgba(255,255,255,0.95);
+          font-size:14px;font-weight:600;font-family:-apple-system,sans-serif;
+          cursor:pointer;letter-spacing:-0.01em;transition:background 0.16s;">
+          📷 &nbsp;Start Scanning
         </button>
+        <div style="margin-top:11px;">
+          <button onclick="goTo('s2')" style="
+            width:100%;padding:9px 16px;border-radius:100px;
+            background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);
+            color:rgba(255,255,255,0.38);font-size:11px;font-weight:400;
+            font-family:-apple-system,sans-serif;cursor:pointer;">
+            Browse Demo Foods
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
 
   <!-- ═══════════════════════════════════════════════
-       SCREEN 2 — TAG
+       SCREEN 1 — LIVE CAMERA
   ═══════════════════════════════════════════════ -->
-  <div class="screen" id="s2">
+  <style>
+    @keyframes scanLine {
+      0%   { top: 0%;   opacity: 1; }
+      85%  { top: 94%;  opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+    @keyframes blink { 0%,100%{opacity:.4} 50%{opacity:1} }
+    .vfb { transition: border-color .25s; }
+    #viewfinder.scanning .vfb { border-color: rgba(50,215,75,.95)!important; }
+    #scanLine {
+      position:absolute; left:0; right:0; height:2px; top:0; display:none; pointer-events:none; z-index:5;
+      background: linear-gradient(to right, transparent 0%, rgba(50,215,75,.9) 50%, transparent 100%);
+      box-shadow: 0 0 12px rgba(50,215,75,.7);
+    }
+    #viewfinder.scanning #scanLine { display:block; animation: scanLine 1.4s linear infinite; }
+    #scanBtn:active { transform: scale(.88)!important; }
+  </style>
+
+  <div class="screen" id="s1">
+    <!-- Live video -->
+    <video id="liveCamera" autoplay playsinline muted
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;"></video>
+
+    <!-- Frozen preview (shown during analysis) -->
+    <canvas id="frozenFrame"
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:3;display:none;"></canvas>
+
+    <!-- Gradient -->
+    <div style="position:absolute;inset:0;z-index:4;pointer-events:none;
+      background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 20%,transparent 48%,rgba(0,0,0,.9) 100%);"></div>
+
+    <!-- Back -->
+    <button class="back-btn" onclick="stopAndGoHome()" style="z-index:30;">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Home
+    </button>
+
+    <!-- Status -->
+    <div style="position:absolute;top:28px;left:50%;transform:translateX(-50%);z-index:30;
+      padding:8px 22px;border-radius:100px;white-space:nowrap;max-width:80%;overflow:hidden;text-overflow:ellipsis;
+      background:rgba(0,0,0,.65);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+      border:1px solid rgba(255,255,255,.13);font-size:12px;font-weight:500;color:rgba(255,255,255,.9);">
+      <span id="liveStatusText">📡 &nbsp;Starting camera...</span>
+    </div>
+
+    <!-- Camera blocked fallback -->
+    <div id="cameraFallback" style="display:none;position:absolute;inset:0;z-index:28;
+      background:rgba(4,4,8,.97);align-items:center;justify-content:center;flex-direction:column;gap:18px;text-align:center;">
+      <div style="font-size:48px;">📷</div>
+      <div style="font-size:17px;font-weight:700;color:rgba(255,255,255,.95);">Camera Access Required</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.45);max-width:270px;line-height:1.8;">
+        Run <code style="background:rgba(255,255,255,.10);padding:3px 8px;border-radius:6px;font-size:11px;">node serve.mjs</code>
+        then open <strong style="color:rgba(255,255,255,.7);">localhost:3001</strong>
+      </div>
+      <label for="cameraInput" style="padding:13px 32px;border-radius:100px;cursor:pointer;
+        background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+        color:rgba(255,255,255,.9);font-size:14px;font-weight:600;font-family:inherit;">
+        📂 &nbsp;Upload Photo Instead
+      </label>
+    </div>
+
+    <!-- Viewfinder -->
+    <div id="viewfinder" style="position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);
+      width:480px;height:300px;z-index:20;overflow:hidden;border-radius:16px;">
+      <div id="scanLine"></div>
+      <div class="vfb" style="position:absolute;top:0;left:0;width:52px;height:52px;
+        border-top:3px solid rgba(255,255,255,.75);border-left:3px solid rgba(255,255,255,.75);border-radius:14px 0 0 0;"></div>
+      <div class="vfb" style="position:absolute;top:0;right:0;width:52px;height:52px;
+        border-top:3px solid rgba(255,255,255,.75);border-right:3px solid rgba(255,255,255,.75);border-radius:0 14px 0 0;"></div>
+      <div class="vfb" style="position:absolute;bottom:0;left:0;width:52px;height:52px;
+        border-bottom:3px solid rgba(255,255,255,.75);border-left:3px solid rgba(255,255,255,.75);border-radius:0 0 0 14px;"></div>
+      <div class="vfb" style="position:absolute;bottom:0;right:0;width:52px;height:52px;
+        border-bottom:3px solid rgba(255,255,255,.75);border-right:3px solid rgba(255,255,255,.75);border-radius:0 0 14px 0;"></div>
+    </div>
+
+    <!-- Captured frame preview (small, shown during analysis) -->
+    <canvas id="previewThumb" style="
+      display:none;position:absolute;right:20px;top:50%;transform:translateY(-50%);
+      width:90px;height:90px;object-fit:cover;z-index:35;
+      border-radius:12px;border:2px solid rgba(50,215,75,.6);
+      box-shadow:0 4px 16px rgba(0,0,0,.5);"></canvas>
+
+    <!-- Bottom controls -->
+    <div style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+      z-index:30;display:flex;flex-direction:column;align-items:center;gap:16px;width:480px;">
+
+      <!-- Instruction -->
+      <div id="scanHint" style="font-size:13px;font-weight:500;color:rgba(255,255,255,.5);text-align:center;
+        animation:blink 2s ease-in-out infinite;">
+        음식을 카메라에 비추고 📷 버튼을 누르세요
+      </div>
+
+      <!-- Buttons row -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:32px;width:100%;">
+
+        <!-- Upload button -->
+        <label for="cameraInput" style="
+          width:52px;height:52px;border-radius:50%;cursor:pointer;
+          background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);
+          display:flex;align-items:center;justify-content:center;font-size:22px;
+          backdrop-filter:blur(10px);" title="Upload photo">
+          🖼️
+        </label>
+
+        <!-- Main scan button -->
+        <button id="scanBtn" onclick="triggerScan()" style="
+          width:80px;height:80px;border-radius:50%;border:5px solid rgba(255,255,255,.35);cursor:pointer;
+          background:white;box-shadow:0 0 0 2px rgba(255,255,255,.15),0 8px 30px rgba(0,0,0,.5);
+          display:flex;align-items:center;justify-content:center;
+          transition:transform .15s cubic-bezier(.34,1.56,.64,1);font-size:28px;">
+          📷
+        </button>
+
+        <!-- Spacer mirror -->
+        <div style="width:52px;height:52px;"></div>
+      </div>
+    </div>
+
+    <!-- Result card -->
+    <div id="liveResultCard" style="display:none;opacity:0;
+      position:absolute;bottom:160px;left:50%;transform:translateX(-50%) translateY(16px);
+      width:520px;max-width:calc(100vw - 32px);z-index:40;
+      transition:opacity .35s ease,transform .35s cubic-bezier(.22,1,.36,1);"></div>
+
+    <canvas id="captureCanvas" style="display:none;"></canvas>
+    <input id="cameraInput" type="file" accept="image/*" capture="environment" style="display:none;">
+  </div>
+
+<div class="screen" id="s2">
     <button class="back-btn fade-up" onclick="goTo('s1')">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Back
@@ -1480,33 +1587,33 @@ window.addEventListener('resize', applyScale);
 /* ── API Key ── */
 function getApiKey() { return sessionStorage.getItem('oai_key'); }
 
+let _pendingAction = null;
+
 function saveApiKey() {
   const val = document.getElementById('apiKeyInput').value.trim();
   if (!val.startsWith('sk-')) { alert('Please enter a valid OpenAI key (starts with sk-)'); return; }
   sessionStorage.setItem('oai_key', val);
   document.getElementById('apiKeyModal').style.display = 'none';
-  triggerCamera();
+  if (_pendingAction === 'startScan') {
+    _pendingAction = null;
+    goTo('s1');
+    startLiveCamera();
+  } else {
+    document.getElementById('cameraInput').click();
+  }
 }
 
 function triggerCamera() {
   document.getElementById('cameraInput').click();
 }
 
-/* ── Camera label click intercept: check key first ── */
-document.querySelector('label[for="cameraInput"]').addEventListener('click', function(e) {
-  if (!getApiKey()) {
-    e.preventDefault();
-    document.getElementById('apiKeyModal').style.display = 'flex';
-  }
-});
 
-/* ── Camera input change → GPT-4o analysis ── */
+/* ── Photo upload → GPT-4o analysis ── */
 document.getElementById('cameraInput').addEventListener('change', async function(e) {
   const file = e.target.files[0];
   if (!file) return;
-
   const key = getApiKey();
-  if (!key) return;
+  if (!key) { document.getElementById('apiKeyModal').style.display = 'flex'; return; }
 
   const loading = document.getElementById('scanLoading');
   loading.style.display = 'flex';
@@ -1514,41 +1621,32 @@ document.getElementById('cameraInput').addEventListener('change', async function
   const reader = new FileReader();
   reader.onload = async function(ev) {
     const b64 = ev.target.result.split(',')[1];
-    const mime = file.type || 'image/jpeg';
-
+    const mimeType = file.type || 'image/jpeg';
     try {
       const resp = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + key
-        },
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + key },
         body: JSON.stringify({
-          model: 'gpt-4o',
-          messages: [{
-            role: 'user',
-            content: [
-              { type: 'image_url', image_url: { url: 'data:' + mime + ';base64,' + b64 } },
-              { type: 'text', text: 'Identify the food in this image and return ONLY a valid JSON object with no markdown or extra text. Fields required:\n{"name":"food name","emoji":"single emoji","risk":"low|medium|high","grade":"A|B|C|D","gradeDesc":"short description e.g. Low Glycemic Impact","calories":number,"netCarbs":number,"macros":{"carbs":{"pct":number,"val":"Xg"},"fiber":{"pct":number,"val":"Xg"},"protein":{"pct":number,"val":"Xg"},"fat":{"pct":number,"val":"Xg"}},"gi":"LOW|MED|HIGH","gi_val":number,"carbs_g":number,"fiber_g":number,"protein_g":number,"fat_g":number,"sugar_g":number}' }
-            ]
-          }],
-          max_tokens: 600
+          model: 'gpt-4o', max_tokens: 600, temperature: 0.1,
+          messages: [
+            { role: 'system', content: 'You are a food label scanner. Read all text in the image first, then identify the product. Return pure JSON only.' },
+            { role: 'user', content: [
+              { type: 'image_url', image_url: { url: 'data:' + mimeType + ';base64,' + b64, detail: 'high' } },
+              { type: 'text', text: FOOD_PROMPT }
+            ]}
+          ]
         })
       });
-
-      if (!resp.ok) {
-        const err = await resp.json();
-        throw new Error(err.error?.message || 'API error ' + resp.status);
-      }
-
+      if (!resp.ok) { const e2=await resp.json().catch(()=>({})); throw new Error(e2.error?.message||'HTTP '+resp.status); }
       const data = await resp.json();
-      let text = data.choices[0].message.content.trim();
-      text = text.replace(/```json|```/g, '').trim();
-      const food = JSON.parse(text);
+      let raw = data.choices[0].message.content.trim().replace(/^```(?:json)?\s*/i,'').replace(/\s*```\s*$/i,'').trim();
+      const m = raw.match(/\{[\s\S]*\}/);
+      if (!m) throw new Error('No JSON in response');
+      const food = JSON.parse(m[0]);
+      if (food.noFood) throw new Error('No food detected in image');
       showScannedFood(food);
-
     } catch(err) {
-      alert('❌ Analysis failed:\n' + err.message);
+      alert('Analysis failed: ' + err.message);
     } finally {
       loading.style.display = 'none';
       e.target.value = '';
@@ -1592,6 +1690,374 @@ function showScannedFood(f) {
   };
 
   selectFood('_scanned');
+}
+
+
+/* ══════════════════════════════════════════════════════
+   LIVE CAMERA
+══════════════════════════════════════════════════════ */
+let cameraStream = null;
+let isAnalyzing  = false;
+
+/* ── Prompt: NEVER returns noFood for any food/drink image ── */
+const FOOD_PROMPT = `You are a food & nutrition expert AI with OCR capability.
+
+TASK: Look at this image and identify ANY food, drink, snack, ingredient, or packaged product.
+
+STEP 1 – READ TEXT: Scan every label, wrapper, can, bottle, bag for text (any language).
+STEP 2 – IDENTIFY: Name the exact product using the text + visual cues.
+  Examples: 코카콜라→"Coca-Cola Classic", 포카리스웨트→"Pocari Sweat", 새우깡→"Shrimp Crackers",
+  허니버터칩→"Honey Butter Chip", 오레오→"Oreo Cookies", 빼빼로→"Pepero", 신라면→"Shin Ramyun",
+  바나나→"Banana", 사과→"Apple", 밥→"White Rice", 치킨→"Fried Chicken"
+STEP 3 – NUTRITION: Use label numbers if readable; otherwise use standard well-known values.
+
+Return ONLY raw JSON, no markdown, no explanation:
+{"name":"<product name>","emoji":"<1 emoji>","risk":"low|medium|high","grade":"A|B|C|D","gradeDesc":"<short>","calories":<n>,"netCarbs":<n>,"carbs_g":<n>,"fiber_g":<n>,"sugar_g":<n>,"protein_g":<n>,"fat_g":<n>,"saturated_fat_g":<n>,"sodium_mg":<n>,"macros":{"carbs":{"pct":<0-100>,"val":"<Xg>"},"fiber":{"pct":<0-100>,"val":"<Xg>"},"protein":{"pct":<0-100>,"val":"<Xg>"},"fat":{"pct":<0-100>,"val":"<Xg>"}},"gi":"LOW|MED|HIGH","gi_val":<0-100>,"ingredients":[]}
+
+Grade scale: A=GI<40 or sugar<5g · B=GI 40-55 · C=GI 55-70 · D=GI>70 or sugar>20g
+CRITICAL: If you see ANY food/drink item at all, return its data — NEVER return {"noFood":true} for food images.
+Only {"noFood":true} if the image is 100% non-food (e.g., blank wall, face with no food anywhere, keyboard).`
+
+/* ── Camera start ─────────────────────────────────────────── */
+
+function startScan() {
+  if (!getApiKey()) {
+    _pendingAction = 'startScan';
+    document.getElementById('apiKeyModal').style.display = 'flex';
+    return;
+  }
+  goTo('s1');
+  startLiveCamera();
+}
+
+function startLiveCamera() {
+  const video    = document.getElementById('liveCamera');
+  const fallback = document.getElementById('cameraFallback');
+  setLiveStatus('📡 &nbsp;Starting camera...');
+
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    showCameraFallback(); return;
+  }
+  navigator.mediaDevices.getUserMedia({
+    video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } }
+  }).then(stream => {
+    cameraStream = stream;
+    video.srcObject = stream;
+    if (fallback) fallback.style.display = 'none';
+    video.addEventListener('playing', () => {
+      setLiveStatus('📷 &nbsp;음식을 비추고 📷 를 누르세요');
+    }, { once: true });
+    video.play().catch(() => {});
+  }).catch(err => {
+    console.warn('Camera:', err.name, err.message);
+    showCameraFallback();
+  });
+}
+
+function showCameraFallback() {
+  const f = document.getElementById('cameraFallback');
+  if (f) f.style.display = 'flex';
+  setLiveStatus('📂 &nbsp;사진을 업로드하세요');
+}
+
+/* ── Main scan trigger ───────────────────────────────────── */
+
+async function triggerScan() {
+  if (isAnalyzing) return;
+
+  const video = document.getElementById('liveCamera');
+  const key   = getApiKey();
+
+  if (!key) {
+    document.getElementById('apiKeyModal').style.display = 'flex';
+    return;
+  }
+  if (!video || !video.videoWidth || video.videoWidth < 10) {
+    setLiveStatus('⚠️ &nbsp;카메라가 준비되지 않았습니다. 잠시 후 다시 시도하세요.');
+    return;
+  }
+
+  isAnalyzing = true;
+  hideLiveResult();
+
+  /* 1. Capture frame from live video */
+  const vw = video.videoWidth, vh = video.videoHeight;
+  console.log('[Scan] Video size:', vw, 'x', vh);
+
+  /* Show frozen frame as full-screen preview */
+  const frozen = document.getElementById('frozenFrame');
+  frozen.width  = vw;
+  frozen.height = vh;
+  frozen.getContext('2d').drawImage(video, 0, 0, vw, vh);
+  frozen.style.display = 'block';
+
+  /* Compress to 1280px for API */
+  const cw = Math.min(vw, 1280), ch = Math.round(cw * vh / vw);
+  const cap = document.getElementById('captureCanvas');
+  cap.width = cw; cap.height = ch;
+  cap.getContext('2d').drawImage(video, 0, 0, cw, ch);
+  const b64 = cap.toDataURL('image/jpeg', 0.92).split(',')[1];
+  console.log('[Scan] Image b64 length:', b64.length, '— size ~', Math.round(b64.length * 0.75 / 1024), 'KB');
+
+  /* Show small thumbnail in corner */
+  const thumb = document.getElementById('previewThumb');
+  thumb.width  = 90;
+  thumb.height = 90;
+  const tc = thumb.getContext('2d');
+  const scale = Math.min(90/cw, 90/ch);
+  const tw = cw*scale, th = ch*scale;
+  tc.drawImage(cap, (90-tw)/2, (90-th)/2, tw, th);
+  thumb.style.display = 'block';
+
+  /* 2. Update UI */
+  setScanBtnState('busy');
+  setScanningUI(true);
+  setLiveStatus('🔬 &nbsp;AI가 분석 중...');
+
+  /* 3. Call GPT-4o */
+  try {
+    console.log('[Scan] Calling GPT-4o...');
+    const resp = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + key },
+      body: JSON.stringify({
+        model: 'gpt-4o',
+        max_tokens: 700,
+        temperature: 0,
+        messages: [
+          {
+            role: 'system',
+            content: 'You are a food scanner AI. Identify the food or drink in the image. Return ONLY raw JSON, no markdown.'
+          },
+          {
+            role: 'user',
+            content: [
+              { type: 'image_url', image_url: { url: 'data:image/jpeg;base64,' + b64, detail: 'high' } },
+              { type: 'text',      text: FOOD_PROMPT }
+            ]
+          }
+        ]
+      })
+    });
+
+    console.log('[Scan] HTTP status:', resp.status);
+
+    if (!resp.ok) {
+      const errBody = await resp.json().catch(() => ({}));
+      const msg = errBody.error?.message || ('HTTP ' + resp.status);
+      console.error('[Scan] API error:', msg);
+      throw new Error(msg);
+    }
+
+    const data = await resp.json();
+    const raw  = (data.choices?.[0]?.message?.content || '').trim()
+      .replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
+
+    console.log('[Scan] GPT-4o raw response:', raw.slice(0, 300));
+
+    const match = raw.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error('JSON 없음 — GPT응답: ' + raw.slice(0, 120));
+
+    const food = JSON.parse(match[0]);
+    console.log('[Scan] Parsed food:', food.name, '| noFood:', food.noFood);
+
+    if (food.noFood) {
+      setLiveStatus('❌ &nbsp;음식을 찾지 못했습니다. 더 가까이 대보세요.');
+      unfreezeCamera();
+    } else {
+      setLiveStatus('✅ &nbsp;' + food.name);
+      showLiveResult(food);
+      setScanningUI(false);
+    }
+  } catch (e) {
+    console.error('[Scan] Error:', e);
+    /* Show full error so we can debug */
+    setLiveStatus('❌ &nbsp;오류: ' + e.message.slice(0, 90));
+    alert('스캔 오류:\n\n' + e.message + '\n\n브라우저 콘솔(F12)에서 자세한 내용을 확인하세요.');
+    unfreezeCamera();
+  } finally {
+    isAnalyzing = false;
+    setScanBtnState('idle');
+  }
+}
+
+function unfreezeCamera() {
+  const frozen = document.getElementById('frozenFrame');
+  const thumb  = document.getElementById('previewThumb');
+  if (frozen) frozen.style.display = 'none';
+  if (thumb)  thumb.style.display  = 'none';
+  setScanningUI(false);
+}
+
+function setScanBtnState(state) {
+  const btn  = document.getElementById('scanBtn');
+  const hint = document.getElementById('scanHint');
+  if (!btn) return;
+  if (state === 'busy') {
+    btn.style.opacity   = '0.45';
+    btn.style.transform = 'scale(0.88)';
+    if (hint) { hint.style.animation = 'none'; hint.textContent = 'AI 분석 중...'; }
+  } else {
+    btn.style.opacity   = '1';
+    btn.style.transform = 'scale(1)';
+    if (hint) { hint.style.animation = ''; hint.textContent = '음식을 카메라에 비추고 📷 버튼을 누르세요'; }
+  }
+}
+
+function setScanningUI(on) {
+  const vf = document.getElementById('viewfinder');
+  if (!vf) return;
+  if (on) vf.classList.add('scanning');
+  else    vf.classList.remove('scanning');
+}
+
+function stopLiveCamera() {
+  if (cameraStream) { cameraStream.getTracks().forEach(t => t.stop()); cameraStream = null; }
+  const video = document.getElementById('liveCamera');
+  if (video) video.srcObject = null;
+  isAnalyzing = false;
+  unfreezeCamera();
+  hideLiveResult();
+}
+
+function stopAndGoHome() { stopLiveCamera(); goTo('s0'); }
+
+function setLiveStatus(html) {
+  const el = document.getElementById('liveStatusText');
+  if (el) el.innerHTML = html;
+}
+
+function hideLiveResult() {
+  const card = document.getElementById('liveResultCard');
+  if (!card) return;
+  card.style.opacity = '0';
+  card.style.transform = 'translateX(-50%) translateY(16px)';
+  setTimeout(() => { card.style.display = 'none'; }, 350);
+}
+
+function showLiveResult(food) {
+  const rc = {
+    low:    { color:'var(--green)', bg:'rgba(50,215,75,0.16)',  bd:'rgba(50,215,75,0.32)'  },
+    medium: { color:'var(--amber)', bg:'rgba(255,159,10,0.16)', bd:'rgba(255,159,10,0.32)' },
+    high:   { color:'var(--red)',   bg:'rgba(255,69,58,0.16)',  bd:'rgba(255,69,58,0.32)'  },
+  };
+  const c = rc[food.risk] || rc.medium;
+  const riskLabel = { low:'Low Impact', medium:'Moderate', high:'High Impact' }[food.risk] || food.risk;
+  const clamp = n => Math.min(Math.max(Number(n) || 0, 0), 100);
+  const ingredients = Array.isArray(food.ingredients) && food.ingredients.length
+    ? food.ingredients.slice(0, 8) : [];
+
+  const card = document.getElementById('liveResultCard');
+  card._pendingFood = food;
+  card.innerHTML = `
+    <div style="background:rgba(4,4,8,.97);
+      backdrop-filter:blur(52px) saturate(220%);-webkit-backdrop-filter:blur(52px) saturate(220%);
+      border:1px solid rgba(255,255,255,.15);border-radius:26px;overflow:hidden;
+      box-shadow:0 30px 90px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.07);">
+
+      <div onclick="confirmLiveFood()" style="display:flex;align-items:center;gap:14px;
+        padding:18px 20px 12px;cursor:pointer;"
+        onpointerdown="this.parentElement.style.transform='scale(.987)'"
+        onpointerup="this.parentElement.style.transform=''"
+        onpointerleave="this.parentElement.style.transform=''">
+        <div style="font-size:46px;line-height:1;flex-shrink:0;">${food.emoji}</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:16px;font-weight:700;color:rgba(255,255,255,.97);
+            letter-spacing:-.022em;margin-bottom:4px;
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${food.name}</div>
+          <div style="display:flex;gap:6px;align-items:center;">
+            <span style="font-size:12px;color:rgba(255,255,255,.50);">${food.calories} kcal</span>
+            <span style="color:rgba(255,255,255,.20);">·</span>
+            <span style="font-size:12px;font-weight:600;color:${c.color};">${riskLabel}</span>
+          </div>
+        </div>
+        <div style="width:46px;height:46px;border-radius:50%;flex-shrink:0;
+          background:${c.bg};border:2px solid ${c.bd};
+          display:flex;align-items:center;justify-content:center;
+          font-size:20px;font-weight:800;color:${c.color};">${food.grade}</div>
+      </div>
+
+      <div style="margin:0 14px;border-radius:14px;overflow:hidden;
+        border:1px solid rgba(255,255,255,.10);margin-bottom:10px;">
+        <div style="background:rgba(255,255,255,.06);padding:7px 14px;font-size:10px;font-weight:700;
+          letter-spacing:.08em;color:rgba(255,255,255,.45);text-transform:uppercase;">Nutrition Facts · per serving</div>
+        ${[
+          {label:'Calories',        val:food.calories+' kcal',                bold:true,  accent:null},
+          {label:'Total Carbs',     val:(food.carbs_g||food.netCarbs||0)+'g', bold:false, accent:'rgba(255,159,10,.9)'},
+          {label:'  Sugar',         val:(food.sugar_g||0)+'g',               bold:false, accent:'rgba(255,96,96,.85)',  indent:true},
+          {label:'  Dietary Fiber', val:(food.fiber_g||0)+'g',               bold:false, accent:'rgba(50,215,75,.85)',  indent:true},
+          {label:'Protein',         val:(food.protein_g||0)+'g',             bold:false, accent:'rgba(10,132,255,.9)'},
+          {label:'Total Fat',       val:(food.fat_g||0)+'g',                 bold:false, accent:'rgba(255,255,255,.6)'},
+          {label:'  Saturated Fat', val:(food.saturated_fat_g||0)+'g',       bold:false, accent:'rgba(255,180,80,.8)', indent:true},
+          {label:'Sodium',          val:(food.sodium_mg||0)+'mg',            bold:false, accent:'rgba(200,160,255,.85)'},
+        ].map((r,i) => `
+          <div style="display:flex;justify-content:space-between;align-items:center;
+            padding:${r.bold?'9px':'6px'} 14px ${r.bold?'9px':'6px'} ${r.indent?'24px':'14px'};
+            background:${i%2===0?'rgba(255,255,255,.025)':'transparent'};
+            border-top:1px solid rgba(255,255,255,.05);">
+            <span style="font-size:${r.bold?'14px':'12px'};font-weight:${r.bold?700:400};
+              color:rgba(255,255,255,${r.bold?.90:.60});">${r.label}</span>
+            <span style="font-size:${r.bold?'14px':'12px'};font-weight:${r.bold?800:600};
+              color:${r.accent||'rgba(255,255,255,.90)'};">${r.val}</span>
+          </div>`).join('')}
+      </div>
+
+      <div style="padding:0 14px 10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+        ${[
+          {k:'Carbs',   v:(food.carbs_g||0)+'g',   col:'var(--amber)',          pct:clamp(food.macros?.carbs?.pct||0)},
+          {k:'Protein', v:(food.protein_g||0)+'g',  col:'var(--blue)',           pct:clamp(food.macros?.protein?.pct||0)},
+          {k:'Fat',     v:(food.fat_g||0)+'g',      col:'rgba(255,255,255,.55)', pct:clamp(food.macros?.fat?.pct||0)},
+          {k:'Sugar',   v:(food.sugar_g||0)+'g',    col:'#FF6060',              pct:clamp(Math.round((food.sugar_g||0)/Math.max(food.carbs_g||1,1)*100))},
+        ].map(m => `
+          <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:9px 11px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+              <span style="font-size:11px;color:rgba(255,255,255,.40);">${m.k}</span>
+              <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,.80);">${m.v}</span>
+            </div>
+            <div style="height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;">
+              <div style="height:100%;width:${m.pct}%;background:${m.col};border-radius:2px;"></div>
+            </div>
+          </div>`).join('')}
+      </div>
+
+      ${ingredients.length ? `
+      <div style="margin:0 14px 12px;padding:10px 13px;
+        background:rgba(255,255,255,.04);border-radius:12px;border:1px solid rgba(255,255,255,.08);">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.07em;
+          color:rgba(255,255,255,.35);text-transform:uppercase;margin-bottom:7px;">Ingredients</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.60);line-height:1.6;">${ingredients.join(', ')}</div>
+      </div>` : ''}
+
+      <div style="display:flex;gap:8px;padding:0 14px 16px;">
+        <button onclick="scanAgain()" style="flex:1;padding:11px;border-radius:13px;border:none;cursor:pointer;
+          background:rgba(255,255,255,.10);color:rgba(255,255,255,.80);
+          font-size:13px;font-weight:600;font-family:inherit;">
+          다시 스캔
+        </button>
+        <button onclick="confirmLiveFood()" style="flex:2;padding:11px;border-radius:13px;border:none;cursor:pointer;
+          background:rgba(50,215,75,.20);color:var(--green);
+          font-size:13px;font-weight:700;font-family:inherit;border:1px solid rgba(50,215,75,.35);">
+          Full Analysis →
+        </button>
+      </div>
+    </div>`;
+
+  card.style.display = 'block';
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    card.style.opacity   = '1';
+    card.style.transform = 'translateX(-50%) translateY(0)';
+  }));
+}
+
+function scanAgain() {
+  hideLiveResult();
+  unfreezeCamera();
+  setLiveStatus('📷 &nbsp;음식을 비추고 📷 를 누르세요');
+}
+
+function confirmLiveFood() {
+  const card = document.getElementById('liveResultCard');
+  if (card && card._pendingFood) { stopLiveCamera(); showScannedFood(card._pendingFood); }
 }
 </script>
 </body>
