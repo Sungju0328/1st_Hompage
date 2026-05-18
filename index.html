@@ -612,7 +612,9 @@ html, body {
 <div id="app">
 
   <!-- ── AR Background ───────────────────────────── -->
-  <div class="ar-bg"></div>
+  <div class="ar-bg" id="arBgImg"></div>
+  <video id="arBgVideo" autoplay playsinline muted
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;display:none;"></video>
   <div class="ar-scrim"></div>
 
   <!-- ── Glucose HUD (always visible) ───────────── -->
@@ -1744,6 +1746,10 @@ function startLiveCamera() {
   }).then(stream => {
     cameraStream = stream;
     video.srcObject = stream;
+    const arBgVideo = document.getElementById('arBgVideo');
+    const arBgImg   = document.getElementById('arBgImg');
+    if (arBgVideo) { arBgVideo.srcObject = stream; arBgVideo.style.display = 'block'; arBgVideo.play().catch(()=>{}); }
+    if (arBgImg)   arBgImg.style.display = 'none';
     if (fallback) fallback.style.display = 'none';
     video.addEventListener('playing', () => {
       setLiveStatus('📷 &nbsp;음식을 비추고 📷 를 누르세요');
@@ -1908,6 +1914,10 @@ function stopLiveCamera() {
   if (cameraStream) { cameraStream.getTracks().forEach(t => t.stop()); cameraStream = null; }
   const video = document.getElementById('liveCamera');
   if (video) video.srcObject = null;
+  const arBgVideo = document.getElementById('arBgVideo');
+  const arBgImg   = document.getElementById('arBgImg');
+  if (arBgVideo) { arBgVideo.srcObject = null; arBgVideo.style.display = 'none'; }
+  if (arBgImg)   arBgImg.style.display = 'block';
   isAnalyzing = false;
   unfreezeCamera();
   hideLiveResult();
