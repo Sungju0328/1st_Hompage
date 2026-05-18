@@ -1624,7 +1624,7 @@ document.getElementById('cameraInput').addEventListener('change', async function
     const b64 = ev.target.result.split(',')[1];
     const mimeType = file.type || 'image/jpeg';
     try {
-      const resp = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + key, {
+      const resp = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + key, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1814,7 +1814,7 @@ async function triggerScan() {
   /* 3. Call GPT-4o */
   try {
     console.log('[Scan] Calling Gemini...');
-    const resp = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + key, {
+    const resp = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + key, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
